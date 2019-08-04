@@ -5,8 +5,8 @@ const bodyParser = require('body-parser');
 const app = express();
 
 
-const produto = require('./routes/produto.route'); // Importa rota
-app.use('/produtos', produto);
+const produto = require('./routes/produto.route'); 
+const oferta = require('./routes/oferta.route'); 
 
 // Configurar acesso à BD.
 const mongoose = require('mongoose');
@@ -25,8 +25,11 @@ db.once('open', function() {
   });
 
 app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({extended: false}));
-app.use('/', produto);
+app.use(bodyParser.urlencoded({extended: true}));
+//app.use('/', produto);
+
+app.use('/produtos', produto);
+app.use('/ofertas', oferta);
 
 let porta = 8000;
 app.listen(porta, () => {
