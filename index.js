@@ -23,7 +23,7 @@ db.on('connected', function()
 db.once('open', function() {
     console.log("we're connected!");
   });
-
+  mongoose.set('debug', true);
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: true}));
 //app.use('/', produto);

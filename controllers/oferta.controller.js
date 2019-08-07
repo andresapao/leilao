@@ -1,6 +1,6 @@
 var Oferta = require('../models/oferta.model');
+const mongoose = require('mongoose');
 exports.create = function (req, res, next) {
-    console.log(req);
     let registro = new Oferta(
         {quantidade: req.body.quantidade,
          data: new Date(),
@@ -10,7 +10,17 @@ exports.create = function (req, res, next) {
             if (err) {
                 return next(err);
             }
-            res.send('Registo de oferta criado com sucesso');
+            let produto = mongoose.model('Produto');
+            produto.findById(registro.idProduto, function(err, retorno) {
+              retorno.quantidadeEstoque -= registro.quantidade;
+              retorno.save(function(err)
+              {
+                if (err) {
+                  return next(err);
+              }
+  
+              });
+            });          
         });    
 };
 exports.list = function (req, res, next) {
