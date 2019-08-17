@@ -26,7 +26,8 @@ else {
     const mongoose = require('mongoose');
     const http = require('http');
 
-    let url = 'mongodb://localhost:27017/sampleProductApp';
+    //let url = 'mongodb://localhost:27017/sampleProductApp';
+    let url = 'mongodb+srv://admin:12345@treinamento-lorb1.mongodb.net/test?retryWrites=true&w=majority';
     let mongoDB = process.env.MONGODB_URI || url;
     mongoose.connect(mongoDB, { useNewUrlParser: true });
     mongoose.Promise = global.Promise;
