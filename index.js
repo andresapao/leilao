@@ -50,7 +50,7 @@ else {
     app.use('/produtos', produto);
     app.use('/ofertas', oferta);
     app.use(timeout(30000));    
-    let porta = 8000;
+    let porta = process.env.PORT || 8000;
     app.server.listen(porta, () => {
         console.log('Servidor em execução na porta ' + porta);
     });
